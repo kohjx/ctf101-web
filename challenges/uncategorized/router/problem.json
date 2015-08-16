@@ -1,0 +1,10 @@
+{
+    "name": "Router",
+    "score": 4,
+    "category": "Uncategorized",
+    "grader": "uncategorized/router/grader.py",
+    "description": "Login into admin account at <a target=_blank href='/problem-static/teaser/router/router.php'></a> to get the flag.",
+    "threshold": 0,
+    "weightmap": {},
+    "hint": "Google is your best friend"
+}
