@@ -3,7 +3,7 @@
     "score": 4,
     "category": "Uncategorized",
     "grader": "uncategorized/login/grader.py",
-    "description": "Login into an admin account <a target=_blank href='/problem-static/teaser/login/login.php'></a>",
+    "description": "Login into an admin account <a target=_blank href='/problem-static/uncategorized/login/login.php'></a>",
     "threshold": 0,
     "weightmap": {},
     "hint": "Information is waiting for you at - forget your password"

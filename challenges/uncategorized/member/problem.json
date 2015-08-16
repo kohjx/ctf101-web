@@ -3,7 +3,7 @@
     "score": 4,
     "category": "Uncategorized",
     "grader": "uncategorized/member/grader.py",
-    "description": "Find a way to enter the admin portal found <a target=_blank href='/problem-static/teaser/member/member.php'>here</a>",
+    "description": "Find a way to enter the admin portal found <a target=_blank href='/problem-static/uncategorized/member/member.php'>here</a>",
     "threshold": 0,
     "weightmap": {},
     "hint": "Om nom nom nom"
