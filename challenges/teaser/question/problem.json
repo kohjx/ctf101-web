@@ -1,0 +1,10 @@
+{
+    "name": "Question",
+    "score": 1,
+    "category": "Teaser",
+    "grader": "teaser/question/grader.py",
+    "description": "Answer the question at <a target=_blank href='/problem-static/teaser/question/question.php'>this</a> correctly to get the flag.",
+    "threshold": 0,
+    "weightmap": {},
+    "hint": "Google is your best friend."
+}
