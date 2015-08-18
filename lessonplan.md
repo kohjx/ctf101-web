@@ -183,12 +183,65 @@ Getting started
 Teaser Challenges
 -----------------
 
+#### Practical 1: Hidden
+
+Can you see the hidden flag at once? If you have try to highlight the page, you 
+should see a "Click me to get flag!" link. This is reflected in the following line
+of the source code:
+
+```
+<p><a href="hiddenflag.php"><font color="black">Click me to get flag!</font></a></p>
+```
+
+However, clicking the link bring you to another page "hiddenflag.php" and immediately
+redirect you back to the page! If you cannot catch what the "hiddenflag.php" displayed, 
+you can simply save the link to your computer and read the file. But it is just a fake
+flag :(
+
+Now, let just go back to review the source code, there is a big portion of code dealing 
+with table. But what class "b" and "w" are about? You should be able to find them in the 
+style tag inside the header.   
+ 
+```
+    <head>
+        <title>CTF101 - Hidden</title>
+	    <style> .b {background: #000000;} .w{background: #000000;}</style>
+    </head>
+```
+
+Again, the background color of these two classes matched the page background color making
+the table hidden. By guessing that the two classes should not refer to the same color, 
+class "b" could stand for black color - #000000 and "w" could stand for white color, simply
+change the background to white 
+
+```
+    <head>
+        <title>CTF101 - Hidden</title>
+	    <style> .b {background: #000000;} .w{background: #FFFFFF;}</style>
+    </head>
+```
+
+Then, you should be able to see a QRcode!!! If you cannot scan the QRcode, you can 
+change the page background color to white.
+
+```
+<body style="margin:auto;padding-top:50px;background:black;color:#0F0;">
+
+								TO
+
+<body style="margin:auto;padding-top:50px;background:white;color:#0F0;">
+``` 
+
+
 Introduction to OWASP Top 10 2013
 =================================
+
 https://www.owasp.org
+
 https://www.owasp.org/index.php/Top_10_2013-Top_10
 
 We will cover A1 - A5 in this workshop:
+
 1. A1 - Injection
 2. A2 - Broken Authentication and Session Management
 3. A3 - Cross-Site Scripting (XSS)
