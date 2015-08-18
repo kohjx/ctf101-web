@@ -47,7 +47,7 @@ if ( isset($_POST['username']) && isset($_POST['password']) ) {
             <form method="post" action="">
                 <label for="username">Username: </label><input type="text" name="username"><br/><br/>
                 <label for="password">Password: </label><input type="password" name="password"><br/><br/>
-                <input type="submit" value="submit">
+                <input type="submit" value="Login">
             </form>
 
         </div>

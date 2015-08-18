@@ -1,0 +1,10 @@
+{
+    "name": "Router",
+    "score": 4,
+    "category": "A5",
+    "grader": "a5/router/grader.py",
+    "description": "Login into admin account at this<a target=_blank href='/problem-static/a5/router/router.php'>login portal</a> to get the flag.",
+    "threshold": 0,
+    "weightmap": {},
+    "hint": "Google is your best friend"
+}

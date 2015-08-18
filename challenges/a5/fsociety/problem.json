@@ -1,0 +1,10 @@
+{
+    "name": "fsociety",
+    "score": 5,
+    "category": "A5",
+    "grader": "a5/fsociety/grader.py",
+    "description": "Get the flag from <a target=_blank href='/problem-static/a5/fsociety/fsociety.php'>fsociety</a>",
+    "threshold": 0,
+    "weightmap": {},
+    "hint": "Think like a robot!"
+}
