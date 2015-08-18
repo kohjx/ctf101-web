@@ -180,6 +180,10 @@ To complete this challenge, simply download the file and submit the flag.
 Getting started
 ===============
 
+Some CTF may involve simple web challenges that involve the html source code and
+playing with them and we want to you know how.   
+
+
 Teaser Challenges
 -----------------
 
@@ -231,6 +235,74 @@ If you cannot scan the QRcode, you can change the page background color to white
 
 <body style="margin:auto;padding-top:50px;background:white;color:#0F0;">
 ``` 
+
+#### Practical 1: Quiz
+
+The questions seem pretty easy right? But hold on, the submit button is disabled.... 
+The first step would be to enable the button by removing the "disabled" word. 
+
+```
+<input type="submit" disabled value="Submit Quiz">
+					TO
+<input type="submit" value="Submit Quiz">
+
+```
+
+Now, you can submit the quiz. You seem to have answer all 3 questions correctly, but no flag is 
+returned! Lets find out why.
+
+By looking at the source code, you will find out that for Q1, the value for option 101 is wrong.
+Simply change the value "111" to "101".
+
+```
+<option value="111">101</option>
+			TO
+<option value="101">101</option>	
+```
+
+Next, for Q2, there seem to be a function executing upon removing focus from the text field(onblur).
+The function is running the following code:
+
+```
+<script>
+	function myFunction() {
+		var x = document.getElementById("q2");
+		if(x.value == "lol") {x.value = "loI";}
+	}
+</script>
+```
+
+If your input value is "lol", the function will change it to "loI" which may seem unnoticeable in the 
+browser :D Just remove the onblur method to make your input valid.
+
+```
+<input type="text" name="q2" id="q2" onblur="myFunction()"><br/><br/>
+								TO
+<input type="text" name="q2" id="q2"><br/><br/>
+```
+
+Now for Q3, we have the name for the input field to be "q4", by looking at how these input field name
+are defined in previous questions, we could make a guess that the name should be a "q3" instead.
+
+```
+<input type="radio" name="q4" value="22">22<br>
+								TO
+<input type="radio" name="q3" value="22">22<br>
+```
+
+Is that all we need to do? Look closely, and there is something else! 
+
+There is a hidden field of name "success" and the value is "false". We should change that to "true"
+
+```
+<input type="hidden" name="success" value="false">
+						TO
+<input type="hidden" name="success" value="true">
+```
+
+Alright, lets submit the quiz and get the flag!
+
+You can retry using browser add-ons "Tamper data" to manipulate the post data to get flag. It will be easier =)   
 
 
 Introduction to OWASP Top 10 2013
