@@ -185,9 +185,9 @@ Teaser Challenges
 
 #### Practical 1: Hidden
 
-Can you see the hidden flag at once? If you have try to highlight the page, you 
-should see a "Click me to get flag!" link. This is reflected in the following line
-of the source code:
+Can you see the hidden flag at once? If you have try highlighting the page, you 
+should see a "Click me to get flag!" link. 
+This is reflected in the following line of the source code:
 
 ```
 <p><a href="hiddenflag.php"><font color="black">Click me to get flag!</font></a></p>
@@ -195,12 +195,12 @@ of the source code:
 
 However, clicking the link bring you to another page "hiddenflag.php" and immediately
 redirect you back to the page! If you cannot catch what the "hiddenflag.php" displayed, 
-you can simply save the link to your computer and read the file. But it is just a fake
-flag :(
+you can simply save the link to your computer and read the file. 
+But it is just a fake flag :(
 
-Now, let just go back to review the source code, there is a big portion of code dealing 
-with table. But what class "b" and "w" are about? You should be able to find them in the 
-style tag inside the header.   
+Now, lets go back to review the source code, there is a multiple lines of code dealing 
+with table. But what are class "b" and "w" about? 
+You should be able to find them in the style tag inside the header.   
  
 ```
     <head>
@@ -221,8 +221,8 @@ change the background to white
     </head>
 ```
 
-Then, you should be able to see a QRcode!!! If you cannot scan the QRcode, you can 
-change the page background color to white.
+Then, you should be able to see a QRcode!!! 
+If you cannot scan the QRcode, you can change the page background color to white.
 
 ```
 <body style="margin:auto;padding-top:50px;background:black;color:#0F0;">
