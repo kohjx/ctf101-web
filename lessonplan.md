@@ -181,13 +181,13 @@ Getting started
 ===============
 
 Some CTF may involve simple web challenges that involve the html source code and
-playing with them and we want to you know how.   
+playing with them and we want you to know how.   
 
 
 Teaser Challenges
 -----------------
 
-#### Practical 1: Hidden
+### Practical 1: Hidden
 
 Can you see the hidden flag at once? If you have try highlighting the page, you 
 should see a "Click me to get flag!" link. 
@@ -207,10 +207,10 @@ with table. But what are class "b" and "w" about?
 You should be able to find them in the style tag inside the header.   
  
 ```
-    <head>
-        <title>CTF101 - Hidden</title>
-	    <style> .b {background: #000000;} .w{background: #000000;}</style>
-    </head>
+<head>
+    <title>CTF101 - Hidden</title>
+	<style> .b {background: #000000;} .w{background: #000000;}</style>
+</head>
 ```
 
 Again, the background color of these two classes matched the page background color making
@@ -219,10 +219,10 @@ class "b" could stand for black color - #000000 and "w" could stand for white co
 change the background to white 
 
 ```
-    <head>
-        <title>CTF101 - Hidden</title>
-	    <style> .b {background: #000000;} .w{background: #FFFFFF;}</style>
-    </head>
+<head>
+    <title>CTF101 - Hidden</title>
+	<style> .b {background: #000000;} .w{background: #FFFFFF;}</style>
+</head>
 ```
 
 Then, you should be able to see a QRcode!!! 
@@ -236,7 +236,8 @@ If you cannot scan the QRcode, you can change the page background color to white
 <body style="margin:auto;padding-top:50px;background:white;color:#0F0;">
 ``` 
 
-#### Practical 1: Quiz
+
+### Practical 2: Quiz
 
 The questions seem pretty easy right? But hold on, the submit button is disabled.... 
 The first step would be to enable the button by removing the "disabled" word. 
@@ -319,3 +320,57 @@ We will cover A1 - A5 in this workshop:
 3. A3 - Cross-Site Scripting (XSS)
 4. A4 - Insecure Direct Object References
 5. A5 - Security Misconfiguration
+
+A5 - Security Misconfiguration
+==============================
+
+https://www.owasp.org/index.php/Top_10_2013-A5-Security_Misconfiguration
+
+### Practical 3: Router
+
+You are being told to login into an admin account. If you use "admin" as the username and 
+input some random password, you will only get the messsage - "Wrong username/password" which 
+did not tell you whether the username is correct or wrong.
+
+The only information visible on the page is that this login portal belong to an router - 
+"D-LINK 504G ADSL ROUTER" .Lets google for the default account used in this router. 
+The following information can be found on http://www.routerpasswords.com/
+
+```
+Manufacturer 	Model				Protocol	Username	Password
+D-LINK			504G ADSL ROUTER	HTTP		admin		admin 
+```
+
+Using the credentials, you can login and retrieve the flag.
+
+### Practical 4: fsociety
+
+Click on the link on the page direct you to /fsociety/fsociety.php and then immediately redirect 
+you to a wiki page - Mr. Robot (TV series). 
+
+Does the word "Mr. Robot" or rather "robot" ring a bell on web stuff?
+
+If you have think of web robots, you are right about it. Try visiting robots.txt in the root url and 
+you will see the following:
+
+```
+User-agent: fsociety
+Disallow:
+
+User-agent: *
+Disallow: /fsociety/fsociety.php
+```
+
+Now that we know we have to change our User-agent to "fsociety", simply use browser add-on such as 
+"User-agent switcher" to switch to the desired User-agent. Now click on the link, a "fsociety00.dat"
+will be downloaded.
+
+Either use online file type checker service or hex editor to find out that it is a jpeg image.
+
+``` 
+00000000 ff d8 ff e0 00 10 4a 46 49 46 00 01 01 01 00 48
+
+Hex signature of "ff d8 ff e0" identify file as JPEG
+```
+
+Simple change the ".dat" extension to ".jpg" to see the flag.
