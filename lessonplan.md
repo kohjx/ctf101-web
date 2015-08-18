@@ -315,14 +315,15 @@ https://www.owasp.org/index.php/Top_10_2013-Top_10
 
 We will cover A1 - A5 in this workshop:
 
-1. A1 - Injection
-2. A2 - Broken Authentication and Session Management
-3. A3 - Cross-Site Scripting (XSS)
-4. A4 - Insecure Direct Object References
-5. A5 - Security Misconfiguration
+* A1 - Injection
+* A2 - Broken Authentication and Session Management
+* A3 - Cross-Site Scripting (XSS)
+* A4 - Insecure Direct Object References
+* A5 - Security Misconfiguration
+
 
 A5 - Security Misconfiguration
-==============================
+------------------------------
 
 https://www.owasp.org/index.php/Top_10_2013-A5-Security_Misconfiguration
 
@@ -374,3 +375,32 @@ Hex signature of "ff d8 ff e0" identify file as JPEG
 ```
 
 Simple change the ".dat" extension to ".jpg" to see the flag.
+
+
+A4 - Insecure Direct Object References
+--------------------------------------
+
+https://www.owasp.org/index.php/Top_10_2013-A4-Insecure_Direct_Object_References
+//TODO: 1-3 practical
+
+
+A3 - Cross-Site Scripting (XSS)
+-------------------------------
+
+https://www.owasp.org/index.php/Top_10_2013-A3-Cross-Site_Scripting_(XSS)
+//TODO: 1-3 practical
+
+
+A2 - Broken Authentication and Session Management
+-------------------------------------------------
+
+https://www.owasp.org/index.php/Top_10_2013-A2-Broken_Authentication_and_Session_Management
+//TODO: 1-3 practical
+
+
+A1 - Injection
+--------------
+
+https://www.owasp.org/index.php/Top_10_2013-A1-Injection
+//TODO: 1-3 practical
+
