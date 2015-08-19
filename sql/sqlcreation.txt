@@ -1,0 +1,27 @@
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+CREATE TABLE IF NOT EXISTS `login` (
+  `userID` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `type` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  PRIMARY KEY (`userID`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2147483648 ;
+
+INSERT INTO `login` (`userID`, `username`, `password`, `type`, `email`) VALUES
+(1, 'user', '5f4dcc3b5aa765d61d8327deb882cf99', 'normal', 'user@ctf101.com'),
+(2, 'john32', '5f4dcc3b5aa765d61d8327deb882cf99', 'normal', 'john@ctf101.com'),
+(3, 'may', '5f4dcc3b5aa765d61d8327deb882cf99', 'normal', 'may@ctf101.com'),
+(4, '5andy', '5f4dcc3b5aa765d61d8327deb882cf99', 'normal', 'sandy@ctf101.com'),
+(5, 'Tom', '5f4dcc3b5aa765d61d8327deb882cf99', 'normal', 'tom@ctf101.com'),
+(6, 'greyhats', '5f4dcc3b5aa765d61d8327deb882cf99', 'normal', 'greyhats@ctf101.com'),
+(10, 'p3t3r', '5f4dcc3b5aa765d61d8327deb882cf99', 'normal', 'peter@ctf101.com'),
+(20, 'n3lson', 'e9ef7606634776f071dda30ae9c2c00c', 'admin', 'nelson@ctf101.com'),
+(50, 'jackson1991', '5f4dcc3b5aa765d61d8327deb882cf99', 'normal', 'jackson@ctf101.com'),
+(100, 'mary', '5f4dcc3b5aa765d61d8327deb882cf99', 'normal', 'mary@ctf101.com'),
+(129, 'Harry01', '5f4dcc3b5aa765d61d8327deb882cf99', 'normal', 'harry@ctf101.com'),
+(137, 'd4ni3l', 'e3274be5c857fb42ab72d786e281b4b8', 'admin', 'daniel@ctf101.com'),
+(200, 'jane101', '5f4dcc3b5aa765d61d8327deb882cf99', 'normal', 'jane@ctf101.com'),
+(500, 'ctf101', '5f4dcc3b5aa765d61d8327deb882cf99', 'normal', 'ctf101@ctf101.com');
