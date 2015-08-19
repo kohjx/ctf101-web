@@ -20,7 +20,7 @@ if (isset($type)) {
     if ($type == "admin") {
         echo "You have logged in as an admin. Here your flag: flag{sq!_inj3cti0n}";
     } else {
-        echo "You have logged in as a user. Here your flag: flag[Ctf_Fl@g_HURR@Y]";
+        echo "You have logged in as an user. Here your flag: flag[Ctf_Fl@g_HURR@Y]";
     }
 }
 
@@ -60,7 +60,7 @@ if (isset($type)) {
                 <label for="username">Username: </label><input type="text" name="username"><br/><br/>
                 <label for="password">Password: </label><input type="password" name="password"><br/><br/>
 				<a href="forgetpw.php">Forget your password?</a><br/><br/>
-                <input type="submit">
+                <input type="submit" value="Login">
             </form>
         </div>
     </body>

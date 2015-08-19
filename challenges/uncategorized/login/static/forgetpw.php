@@ -54,8 +54,7 @@ if ( isset($_POST['forgetpw'] )) {
             <form method="post" action="">
 			    Forget your password?<br/>
 				Enter your username to get a password recovery email.<br/><br/>
-                <label for="forgetpwd">Username: </label><input type="text" name="forgetpw"><br/><br/>
-                <input type="submit">
+                <label for="forgetpwd">Username: </label><input type="text" name="forgetpw"><input type="submit" value="Submit">
             </form>
 			<a href="login.php">Return to login page.</a><br/><br/>
         </div>
