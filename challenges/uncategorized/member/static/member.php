@@ -2,11 +2,11 @@
 
 $cookie_user = "User";
 $cookie_user_value = "JohnTan101";
-setcookie($cookie_user, $cookie_user_value);
+setcookie($cookie_user, $cookie_user_value, time() + (86400 * 30), "/"); // 86400 = 1 day
 
 $cookie_member = "Member";
 $cookie_member_value = "Normal";
-setcookie($cookie_member, $cookie_member_value);
+setcookie($cookie_member, $cookie_member_value, time() + (86400 * 30), "/"); // 86400 = 1 day
 
 
 if (isset($_POST['adminportal']) && isset($_COOKIE[$cookie_member])) {
@@ -17,7 +17,15 @@ if (isset($_POST['adminportal']) && isset($_COOKIE[$cookie_member])) {
   }
 }
 
+/*
+Hint:
+1) edit cookie
 
+Answer : 
+Edit cookie "member", change value from "Normal" to "Admin"
+flag{C00ki3_fl@g}
+
+*/
 
 ?>
 
@@ -52,11 +60,10 @@ if (isset($_POST['adminportal']) && isset($_COOKIE[$cookie_member])) {
          \/____/                                                     ╚═╝ ╚═════╝  ╚═╝    
 </pre>
 
-		<h1>Member Page</h1> 
-		Welcome <?php if(isset($cookie_user_value)) { echo $cookie_user_value;} ?> (<?php if(isset($cookie_member_value)) { echo $cookie_member_value;} ?> member),
-		<br/><br/>
+	    <h1>Member Page</h1> 
+
             <form method="post" action="">
-				<label><b>Admin Portal</b></label> <input type="submit" name="adminportal" value="Enter">
+		<label><b>Admin Portal</b></label> <input type="submit" name="adminportal" value="Enter">
             </form>
 
 	    <h2>The site is currently under construction!</h2>
