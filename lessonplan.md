@@ -65,12 +65,10 @@ Topics to Cover
 
 * Getting started
 	* Teaser challenges
-* Introduction to OWASP Top 10 2013
-	* A5
-	* A4
-	* A3
-	* A2
-	* A1
+* Security Misconfiguration
+* SQL injection
+* Local File Inclusion
+* Broken Authentication and Session Management
 	
 	
 Getting started
@@ -202,24 +200,8 @@ Alright, lets submit the quiz and get the flag!
 You can retry using browser add-ons "Tamper data" to manipulate the post data to get flag. It will be easier =)   
 
 
-Introduction to OWASP Top 10 2013
-=================================
-
-https://www.owasp.org
-
-https://www.owasp.org/index.php/Top_10_2013-Top_10
-
-We will cover A1 - A5 in this workshop:
-
-* A1 - Injection
-* A2 - Broken Authentication and Session Management
-* A3 - Cross-Site Scripting (XSS)
-* A4 - Insecure Direct Object References
-* A5 - Security Misconfiguration
-
-
-A5 - Security Misconfiguration
-------------------------------
+Security Misconfiguration
+=========================
 
 https://www.owasp.org/index.php/Top_10_2013-A5-Security_Misconfiguration
 
@@ -240,62 +222,16 @@ D-LINK			504G ADSL ROUTER	HTTP		admin		admin
 
 Using the credentials, you can login and retrieve the flag.
 
-### Practical 4: fsociety
 
-Click on the link on the page direct you to /fsociety/fsociety.php and then immediately redirect 
-you to a wiki page - Mr. Robot (TV series). 
-
-Does the word "Mr. Robot" or rather "robot" ring a bell on web stuff?
-
-If you have think of web robots, you are right about it. Try visiting robots.txt in the root url and 
-you will see the following:
-
-```
-User-agent: fsociety
-Disallow:
-
-User-agent: *
-Disallow: /fsociety/fsociety.php
-```
-
-Now that we know we have to change our User-agent to "fsociety", simply use browser add-on such as 
-"User-agent switcher" to switch to the desired User-agent. Now click on the link, a "fsociety00.dat"
-will be downloaded.
-
-Either use online file type checker service or hex editor to find out that it is a jpeg image.
-
-``` 
-00000000 ff d8 ff e0 00 10 4a 46 49 46 00 01 01 01 00 48
-
-Hex signature of "ff d8 ff e0" identify file as JPEG
-```
-
-Simple change the ".dat" extension to ".jpg" to see the flag.
-
-
-A4 - Insecure Direct Object References
---------------------------------------
-
-https://www.owasp.org/index.php/Top_10_2013-A4-Insecure_Direct_Object_References
-//TODO: 1-3 practical
-
-
-A3 - Cross-Site Scripting (XSS)
--------------------------------
-
-https://www.owasp.org/index.php/Top_10_2013-A3-Cross-Site_Scripting_(XSS)
-//TODO: 1-3 practical
-
-
-A2 - Broken Authentication and Session Management
--------------------------------------------------
+Broken Authentication and Session Management
+============================================
 
 https://www.owasp.org/index.php/Top_10_2013-A2-Broken_Authentication_and_Session_Management
 //TODO: 1-3 practical
 
 
-A1 - Injection
---------------
+SQL Injection
+=============
 
 https://www.owasp.org/index.php/Top_10_2013-A1-Injection
 
