@@ -345,7 +345,7 @@ After running the script, you can login with the username/password and obtain th
 
 
 Local File Inclusion
---------------------
+======================
 A file inclusion vulnerability is a type of vulnerability that is often found on websites. It allows an attacker to include a file , usually through a script on the webserver.
 The vulnerability occurs due to the use of user-supplied input without proper validation. 
 
