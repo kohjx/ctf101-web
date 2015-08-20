@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
     <head>
-        <title>IceCTF | Authorize</title>
+        <title>Login! EvilC0rp</title>
         <link rel="stylesheet" href="css/materialize.css">
         <link rel="stylesheet" href="css/main.css">
     </head>

