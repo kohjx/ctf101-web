@@ -338,6 +338,7 @@ while found == False:
 			print r.content
 			prePassword = prePassword+i
 			found = False
+			break
 ```
 
 After running the script, you can login with the username/password and obtain the flag!
