@@ -4,10 +4,9 @@ session_start();
 if ( isset($_POST['username']) && isset($_POST['password']) ) {
     $link = mysqli_connect('localhost','root','','ctf101') or die("Error " . mysqli_error($link)); 
 
-	/*$username = mysqli_real_escape_string($link,$_POST['username']);
+	$username = mysqli_real_escape_string($link,$_POST['username']);
 	$password = mysqli_real_escape_string($link,$_POST['password']);
-    $query = "SELECT type from login where username=$username and password=md5('$password')";*/
-    $query = "SELECT type from login where username='".$_POST['username']."' and password=md5('".$_POST['password']."')";
+    $query = "SELECT type from login where username='".$username."' and password=md5('".$password."')";
 	
     $result = mysqli_query($link, $query) or die("Error " . mysqli_error($link)); 
     while($row = mysqli_fetch_assoc($result)) {
