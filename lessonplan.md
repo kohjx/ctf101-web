@@ -446,7 +446,7 @@ if (mysqli_num_rows($result) === 1) {
 ?>
 ```
 From the code, you get two information:
-* The username and password parameters are sanitized, and surrounded with single quotes \'\', this tells you that there is no way to do an SQL injection on this page.
+* The username and password parameters are sanitized, and surrounded with single quotes '', this tells you that there is no way to do an SQL injection on this page.
 * The ```$FLAG``` is echo'ed when you login, therefore you need to find a way to obtain the username/password.
 
 Now, we take a look at ```register.php```:
@@ -468,8 +468,9 @@ die("Registration has been disabled.");
 
 From ```register.php```, certain things should raise some red flags immediately.
 * The username parameter is not being sanitized by the mysqli_real_escape_string function.
-<br/>When the mysql query returns at least 1 row, the page would return "Someone has already registered...." else, it'd show that registration has been disabled.
-<br/>Using this information, we are able to first look for an username that exists in the database.
+
+When the mysql query returns at least 1 row, the page would return "Someone has already registered...." else, it'd show that registration has been disabled.
+Using this information, we are able to first look for an username that exists in the database.
 
 The original query is ```SELECT * FROM users WHERE username ='$username'```.
 To look for a username, we can make use of the SQL LIKE operator. 
