@@ -449,8 +449,7 @@ include((@$_GET['page']?$_GET['page'].".php":"main.php"));
 Now, the goal of a hacker, is to manipulate the program into running arbitrary commands that the programmer did not intend for. 
 Here, we see two segments that includes files. Now, the log file would be interesting, and the next section will show you why.
 
-Now, we take a look at the other files:
-login.php:
+Now, we take a look at ```login.php:```
 ```php
 <?php
 $login=@$_POST['login'];
@@ -474,12 +473,12 @@ login<br/><br/>
 </center>
 ```
 
-From login.php, we can tell that it'd be difficult to crack the ```$pwhash```. However, there is an interesting section of the code that logs login attempt to a file determined by the username provided.
+From ```login.php```, we can tell that it'd be difficult to crack the ```$pwhash```. However, there is an interesting section of the code that logs login attempt to a file determined by the username provided.
 Remember from ```index.php```, you are able to include log files? Got an idea of how to run arbitrary commands now?
 
 Let's first try to use the logging function to write some PHP code into the log file, and then run it using ```index.php```.
-* index.php?page=login&debug=1 - Username = nusgreyhats & Password = <?php echo "HAHA GOT YOU!"; ?>
-Or
+* index.php?page=login&debug=1 - Username = nusgreyhats & Password = <?php echo "HAHA GOT YOU!"; ?></br>
+Or</br>
 ```curl -d "login=nusgreyhats&password=<?php echo \"HAHA GOT YOU!\"?>" "http://url/index.php?page=login&debug=1"```
 Remember to change the URL to the correct URL.
 
