@@ -1,0 +1,27 @@
+.logo
+{
+    margin-top: 0.5rem;
+    margin-left: 1rem;
+    margin-bottom: 0.2rem;
+    width: 6rem;
+    height: 100%;
+}
+
+.panel
+{
+
+}
+
+/* label color */
+.input-field label {
+    color: #FFF;
+}
+/* label focus color */
+.input-field input[type=text]:focus + label, .input-field input[type=password]:focus + label {
+    color: #FFF;
+}
+/* label underline focus color */
+.input-field input[type=text]:focus, .input-field input[type=password]:focus {
+    border-bottom: 1px solid #FFF;
+    box-shadow: 0 1px 0 0 #FFF;
+}
