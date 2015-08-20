@@ -1,6 +1,6 @@
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
-CREATE TABLE IF NOT EXISTS `login` (
+CREATE TABLE IF NOT EXISTS `ctf101_login` (
   `userID` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS `login` (
   UNIQUE KEY `username` (`username`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2147483648 ;
 
-INSERT INTO `login` (`userID`, `username`, `password`, `type`, `email`) VALUES
+INSERT INTO `ctf101_login` (`userID`, `username`, `password`, `type`, `email`) VALUES
 (1, 'user', '5f4dcc3b5aa765d61d8327deb882cf99', 'normal', 'user@ctf101.com'),
 (2, 'john32', '5f4dcc3b5aa765d61d8327deb882cf99', 'normal', 'john@ctf101.com'),
 (3, 'may', '5f4dcc3b5aa765d61d8327deb882cf99', 'normal', 'may@ctf101.com'),
