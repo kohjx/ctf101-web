@@ -3,7 +3,7 @@
     "score": 4,
     "category": "Web",
     "grader": "ear/grader.py",
-    "description": "We heard that using EAR can give you more information. Let try to find the <a target=_blank href=''>flag</a>.",
+    "description": "We heard that using EAR can give you more information. Let's try to find the <a target=_blank href=''>flag</a>.",
     "threshold": 0,
     "weightmap": {},
     "hint": "Google is your best friend"
