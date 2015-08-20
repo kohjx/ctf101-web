@@ -1,5 +1,0 @@
-User-agent: fsociety
-Disallow:
-
-User-agent: *
-Disallow: /fsociety/fsociety.php
