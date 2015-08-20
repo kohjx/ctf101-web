@@ -402,7 +402,27 @@ A1 - Injection
 --------------
 
 https://www.owasp.org/index.php/Top_10_2013-A1-Injection
-//TODO: 1-3 practical
+
+
+### Practical 3: Blind SQL Injection
+We now know what SQL Injection is, Blind SQL Injection is similar to a normal SQL Injection, the only difference is the way data is retrieved from the database.
+When the database does not output data to the web page, an attacker is forced to steal data by asking the database a series of true or false questions. This makes
+exploitation more difficult, but not impossible.
+
+Consider this pseudocode:
+```
+$query = $_GET['query'];
+if (db_query($query)) {
+	echo "Successful";
+} else {
+	echo "Fail";
+}
+```
+
+When the query returns false, a "Fail" is displayed, and when the query returns true, "Successful" is displayed.
+Therefore, it is harder to obtain data from the database, as the result is not output to the web page.
+
+
 
 
 Local File Inclusion
@@ -502,10 +522,10 @@ Now, using the ```index.php?log=nusgreyhats``` method, let's run some arbitrary 
 Let's first try to run a ```ls``` command.
 * http://URL/index.php?log=nusgreyhats&cmd=ls - You should be able to see the contents of the current working directory.
 
-Now, we see the flag_ctf101.txt file located in the directory.
+Now, we see the flag.txt file located in the directory.
 
 Let's ```cat``` the file to see the contents.
-* http://URL/index.php?log=nusgreyhats&cmd=cat flag_ctf101.txt
+* http://URL/index.php?log=nusgreyhats&cmd=cat flag.txt
 
 YAY we got the flag!
 
