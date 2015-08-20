@@ -4,5 +4,5 @@
 ?>
 
 <div>
-	<center>The flag is flag{fear_the_ear}</script>
+	<center>The flag is flag{f3ar_the_3ar}</script>
 </div>
