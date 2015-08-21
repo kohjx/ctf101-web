@@ -901,7 +901,7 @@ We then try to get old-new.php
 GET /ear/old-new.php
 ```
 
-And then ... 
+And  ... 
 ```
 <div>
         <center>
