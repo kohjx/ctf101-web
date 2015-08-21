@@ -1,6 +1,6 @@
 <div>
 	<center>
-		<h1>Thou shall not pas</h1>
+		<h1>Thou shall not pass</h1>
 		<font size="7">!!!</font>
 		
 		<h1>NOTICE: We only welcome spider here. </h1>
