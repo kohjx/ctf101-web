@@ -2,5 +2,6 @@ User-agent: *
 Disallow: /
 Disallow: /fsociety/
 Disallow: /fsociety/fsociety/
-Disallow: /fsociety/fsociety/fsociety/
 Disallow: /fsociety/fsociety/fsociety/fsociety00.
+Disallow: /fsociety/fsociety/fsociety/fsociety00.php
+Disallow: /fsociety/fsociety/fsociety/fsociety00.html
