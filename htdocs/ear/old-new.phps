@@ -4,5 +4,7 @@
 ?>
 
 <div>
-	<center>The flag is flag{this_is_of_cuz_redacted}</script>
+	<center>
+		<?php echo "The flag is flag{this_is_of_cuz_redacted}" ?> 
+	</center>
 </div>
