@@ -1,0 +1,11 @@
+{
+    "name": "Feedback",
+    "score": 1,
+    "category": "Feedback",
+    "grader": "survey/survey/grader.py",
+    "description": "Thank you for attending CTF 101. We hope you enjoy yourself. Please give us some feedback on CTF 101 at <a target=_blank href='http://bit.ly/1E7ebKH
+'>here</a>.",
+    "threshold": 0,
+    "weightmap": {},
+    "hint": "Plzzzzz give us feedback. We really appreciate it."
+}
