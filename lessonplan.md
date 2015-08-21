@@ -34,8 +34,8 @@ required tools installed.
 At the minimum, you should have a browser(i.e Chrome/Firefox) with the following 
 extensions/add-ons to complete the practicals:
 
-1. "Tamper data"
-2. "EditThisCookie"
+* "Tamper data" (Chrome/Firefox)
+* "EditThisCookie" (Chrome) or “firebug”(Firefox)
 
 
 Accessing the CTF101 Scoreboard
@@ -64,18 +64,54 @@ Topics to Cover
 ---------------
 
 * Getting started
-	* Teaser challenges
+	* Page Source and HTML Elements
+	* Tamper Data
+	* Cookies
+	* Teaser Challenges
 * Security Misconfiguration
+	* Challenges
 * SQL injection
 * Local File Inclusion
-* Broken Authentication and Session Management
 	
 	
 Getting started
 ===============
 
-Some CTF may involve simple web challenges that involve the html source code and
+Some CTF may have simple web challenges that involves website page source and
 playing with them and we want you to know how.   
+
+Page Source and HTML Elements
+-----------------------------
+For Chrome/Firefox, you can just simply right click on the page and "view page source".
+The page source may appear to look very "packed" without any formatting. 
+
+That why we will use browser developer tool to view them in a nicer layout.
+
+For Firefox, to inspect element, right click on the element and select "Inspect element" or
+pressing "ctrl + shift + c"
+
+For Chrome, to inspect element, right click on the element and select "Inspect element" or
+pressing "ctrl + shift + i"
+
+You can edit the html elements to reflect the changes locally.
+
+Tamper Data
+-----------
+"Tamper Data" is a tool to view and modify HTTP/HTTPS headers and post parameters. 
+
+This tool acts as a proxy between the user and the web site they are browsing. It allows the user 
+to intercept the GETs and POSTs and manipulate the data. 
+
+Imagine an input choice is restricted to "1", "2", "3". During submitting, the user could use 
+manipulate this post parameter and change the value to "4" to bypass restriction.
+
+
+Cookie
+------
+A cookie is typically used by websites to store and record some information in the user browser. Website
+can use these cookies to remember some useful information such as identification, shopping cart items, etc.
+
+"EditThisCookie" (Chrome) or "Firebug" (Firefox) are add-ons that can create/edit/delete cookies.
 
 
 Teaser Challenges
@@ -85,7 +121,7 @@ Teaser Challenges
 
 Can you see the hidden flag at once? If you have try highlighting the page, you 
 should see a "Click me to get flag!" link. 
-This is reflected in the following line of the source code:
+This is reflected in the following line of the page source:
 
 ```
 <p><a href="hiddenflag.php"><font color="black">Click me to get flag!</font></a></p>
@@ -199,6 +235,46 @@ Alright, lets submit the quiz and get the flag!
 
 You can retry using browser add-ons "Tamper data" to manipulate the post data to get flag. It will be easier =)   
 
+### Practical 3: Member
+
+You are told that you have already logged in the site. The page shows you as a normal member with the 
+username "JohnTan101". Other than that, there is an admin portal.
+
+```
+Welcome JohnTan101 (Normal member),
+Admin Portal <Enter>
+```
+
+You can not possibly enter the portal as a normal member right? Try entering, and you will be greeted 
+with the following:
+
+```
+Only Member with Admin rights is allow to enter
+```
+
+How could we get admin rights?
+
+Using some cookie inspector, we see the following and could guess that the type of member might be controlled
+by the cookie "Member". But again, what could those value mean?
+
+```
+Name	Value		Domain					Path
+Member	Tm9ybWFs	web.nusgreyhats.org		/member/
+User	JohnTan101	web.nusgreyhats.org		/member/
+```
+
+The value could be encoded? Let try the base64 decode at https://www.base64decode.org/
+The value get decoded to "Normal". let try encode "Admin" in base64 and see if that will give us
+admin rights. 
+
+```
+base64	 	plain
+Tm9ybWFs 	Normal
+QWRtaW4=	Admin
+```
+
+Change the cookie value to "QWRtaW4=" and we are able to enter the portal and get the flag. 
+
 
 Security Misconfiguration
 =========================
@@ -221,13 +297,6 @@ D-LINK			504G ADSL ROUTER	HTTP		admin		admin
 ```
 
 Using the credentials, you can login and retrieve the flag.
-
-
-Broken Authentication and Session Management
-============================================
-
-https://www.owasp.org/index.php/Top_10_2013-A2-Broken_Authentication_and_Session_Management
-//TODO: 1-3 practical
 
 
 SQL Injection
