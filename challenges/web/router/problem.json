@@ -1,9 +1,9 @@
 {
     "name": "Router",
-    "score": 4,
-    "category": "A5",
-    "grader": "a5/router/grader.py",
-    "description": "Login into admin account at this<a target=_blank href='/problem-static/a5/router/router.php'>login portal</a> to get the flag.",
+    "score": 5,
+    "category": "Web",
+    "grader": "web/router/grader.py",
+    "description": "Login into admin account to get the flag. <a target=_blank href='http://128.199.157.19/router/router.php'>login portal</a>",
     "threshold": 0,
     "weightmap": {},
     "hint": "Google is your best friend"

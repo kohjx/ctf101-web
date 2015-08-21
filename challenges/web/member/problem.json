@@ -1,9 +1,9 @@
 {
     "name": "Member",
-    "score": 4,
-    "category": "Uncategorized",
-    "grader": "uncategorized/member/grader.py",
-    "description": "You have logged in at this site. Find a way to enter the admin portal found <a target=_blank href='/problem-static/uncategorized/member/member.php'>here</a>",
+    "score": 5,
+    "category": "Web",
+    "grader": "web/member/grader.py",
+    "description": "You have logged in at this site.<br/>Find a way to enter the admin portal found <a target=_blank href='http://128.199.157.19/member/member.php'>here</a>",
     "threshold": 0,
     "weightmap": {},
     "hint": "Om nom nom nom"
