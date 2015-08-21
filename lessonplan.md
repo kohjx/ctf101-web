@@ -448,5 +448,25 @@ Let's ```cat``` the file to see the contents.
 
 YAY we got the flag!
 
+Execution after Redirect (EAR)
+==============================
+Execution after Redirect (EAR) is an attack where attacker can ignore redirects and try to get content not intended for the user. Let's consider the following code
+```php
+$current_user = get_current_user ();
+if (!$current_user ->is_admin())
+{
+    header("Location: /");
+}
+echo "Sensitive Information";
+```
+
+In this example, this simple application simply check if the user is admin or not. If it is not, the user will get redirected away via "header()". Else, the page will just continue loading. 
+
+EAR is a logic flaw that arises when a web application developer misunderstood the sematics of redirection. The typical belief is that the web application will halt its processing after the web application perform a redirection. In this above example, the common misunderstanding is that the echo "Sensitive Information" will not be executed if the user is not admin. 
+
+This may not be true. Some framework and languages executes all the rest of the operation after the redirection operation. The browser simply perpetuates this understanding by simply obediently performing the rediredion when it saw "header". To the web developer and also normal user, it seems like the following lines after the redirection is not executed. 
+
+However, what if you have "something" that don't obey the redirect operation? 
 
 
+Credit: http://cs.ucsb.edu/~bboe/public/pubs/fear-the-ear-ccs2011.pdf
