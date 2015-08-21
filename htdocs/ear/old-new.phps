@@ -5,6 +5,6 @@
 
 <div>
 	<center>
-		<?php echo "The flag is flag{this_is_of_cuz_redacted}" ?> 
+		<?php echo "The flag is [redacted]" ?> 
 	</center>
 </div>
