@@ -5,12 +5,13 @@ $cookie_user_value = "JohnTan101";
 setcookie($cookie_user, $cookie_user_value);
 
 $cookie_member = "Member";
-$cookie_member_value = "Normal";
+$cookie_member_value = "Tm9ybWFs";
 setcookie($cookie_member, $cookie_member_value);
 
+$cookie_member_value = base64_decode($cookie_member_value);
 
 if (isset($_POST['adminportal']) && isset($_COOKIE[$cookie_member])) {
-  if ($_COOKIE[$cookie_member] == "Admin"  ) { 
+  if ($_COOKIE[$cookie_member] == "QWRtaW4="  ) { 
 	echo "flag{C00ki3_n0m_n0m_n0m}";
   } else {
 	echo "Only Member with Admin rights is allow to enter";
