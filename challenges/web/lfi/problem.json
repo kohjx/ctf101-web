@@ -3,7 +3,7 @@
 	"score": 6,
 	"category": "Local File Inclusion",
 	"grader": "web/lfi/grader.py",
-	"description": "Read flag.txt located in the server. <a href="http://128.199.157.19/lfi/index.php>Web page</a>",
+	"description": "Read flag.txt located in the server. <a href="http://web.nusgreyhats.org/lfi/index.php>Web page</a>",
 	"threshold": 0,
 	"weightmap": {},
 	"hint": "Find a way to include custom PHP code using the logger function."

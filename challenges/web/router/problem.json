@@ -3,7 +3,7 @@
     "score": 3,
     "category": "Security Misconfiguration",
     "grader": "web/router/grader.py",
-    "description": "Login into admin account to get the flag. <a target=_blank href='http://128.199.157.19/router/router.php'>login portal</a>",
+    "description": "Login into admin account to get the flag. <a target=_blank href='http://web.nusgreyhats.org/router/router.php'>login portal</a>",
     "threshold": 0,
     "weightmap": {},
     "hint": "Google is your best friend"

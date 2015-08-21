@@ -3,7 +3,7 @@
     "score": 8,
     "category": "SQL Injection",
     "grader": "web/login/grader.py",
-    "description": "Login into an admin account <a target=_blank href='http://128.199.157.19/login/login.php'></a>",
+    "description": "Login into an admin account <a target=_blank href='http://web.nusgreyhats.org/login/login.php'></a>",
     "threshold": 0,
     "weightmap": {},
     "hint": "Have you tried 1=1 injection?<br/> \"WHERE table_schema=database()\" may be helpful."

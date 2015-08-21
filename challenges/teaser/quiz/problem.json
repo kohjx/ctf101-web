@@ -3,7 +3,7 @@
     "score": 1,
     "category": "Teaser",
     "grader": "teaser/quiz/grader.py",
-    "description": "Score 100% at this mini quiz <a target=_blank href='http://128.199.157.19/quiz/quiz.php'>here</a>",
+    "description": "Score 100% at this mini quiz <a target=_blank href='http://web.nusgreyhats.org/quiz/quiz.php'>here</a>",
     "threshold": 0,
     "weightmap": {},
     "hint": "To score 100%, something need to be done to 4 html elements."

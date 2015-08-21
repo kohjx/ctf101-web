@@ -3,7 +3,7 @@
     "score": 1,
     "category": "Teaser",
     "grader": "teaser/hidden/grader.py",
-    "description": "Find the hidden flag <a target=_blank href='http://128.199.157.19/hidden/hidden.php'>here</a>",
+    "description": "Find the hidden flag <a target=_blank href='http://web.nusgreyhats.org/hidden/hidden.php'>here</a>",
     "threshold": 0,
     "weightmap": {},
     "hint": "The web page is too dark."
