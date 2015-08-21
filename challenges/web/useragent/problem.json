@@ -1,0 +1,10 @@
+{
+    "name": "Thou shall not pass",
+    "score": 10,
+    "category": "User agent",
+    "grader": "web/useragent/grader.py",
+    "description": "Thou shall not pass or Thou shall pass? <a target=_blank href='http://web.nusgreyhats.org/useragent/pass.php'>link</a>.",
+    "threshold": 0,
+    "weightmap": {},
+    "hint": "The name of web spider"
+}
