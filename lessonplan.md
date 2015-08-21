@@ -910,4 +910,33 @@ And  ...
 </div>   
 ```
 
+Messing with User agent
+=======================
+User agent is a piece of software that is acting on behalf of an user. In the web environment, different web browser has different capabilities, characteristics or preferences that could influence the representation of web content. So to allow the web server to identify what browser is running on the client's machine, the web browser typically add "User-Agent" to the web header before sending it the web server. So here's are some of the common user agent.
+
+Chrome 
+```
+Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36
+```
+
+Firefox
+```
+Mozilla/5.0 (Windows NT 6.3; rv:36.0) Gecko/20100101 Firefox/36.0
+```
+
+Internet Explorer 
+```
+Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; AS; rv:11.0) like Gecko
+```
+
+Various popular search engine also tries to identify themselves to the web servver
+Google 
+```
+Googlebot/2.1 (+http://www.google.com/bot.html)
+```
+
+Bing 
+```
+bingbot/2.0; +http://www.bing.com/bingbot.htm
+```
 
