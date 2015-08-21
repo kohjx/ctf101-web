@@ -806,14 +806,14 @@ Execution after Redirect (EAR) is an attack where an attacker can ignore redirec
 $current_user = get_current_user ();
 if (!$current_user ->is_admin())
 {
-    header("Location: /");
+    header("Location: some-page.php");
 }
 echo "Sensitive Information";
 ```
 
 In this example, this simple web application simply checks if the user is an admin or not. If it is not, the user will get redirected away via "Location". Else, the page will just continue loading on the web browser. 
 
-So when the browser query the page, the following http header will be received by the browser. The browser receivied "Location: new-old.php" in the web header. This caused the browser to redirect itself imedately to some-page.php 
+So when the browser query the page, the following http header will be received by the browser. The browser receivied "Location: some-page.php" in the web header. This caused the browser to redirect itself imedately to some-page.php 
 
 ```
 HTTP/1.1 302 Found
@@ -918,7 +918,6 @@ User agent is a piece of software that is acting on behalf of a user. In the web
 ```
 Chrome 
 Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36
-
 
 Firefox
 Mozilla/5.0 (Windows NT 6.3; rv:36.0) Gecko/20100101 Firefox/36.0
