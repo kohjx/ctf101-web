@@ -1016,5 +1016,4 @@ We got the flag. So what is happening? Let's take a look at the source code.
 </div>
 ```
 
-So this lousy piece of code is not really well coded. So if it detect that the user agent is Googlebot, it will just simply echo out the content. 
-
+So this poorly written code check user agent is Googlebot. If it is, it will just simply echo out the content. 
