@@ -3,7 +3,7 @@
 	"score": 10,
 	"category": "SQL Injection",
 	"grader": "web/blindsqli/grader.py",
-	"description": "Try logging in as admin to obtain the flag. <a href="http://web.nusgreyhats.org/blindsqli/index.php">Login page</a>",
+	"description": "Try logging in as admin to obtain the flag. <a href='http://web.nusgreyhats.org/blindsqli/index.php'>Login page</a>",
 	"threshold": 0,
 	"weightmap": {},
 	"hint": "Try something simple first. Use the LIKE function instead of the '='"
