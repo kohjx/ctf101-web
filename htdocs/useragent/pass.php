@@ -4,7 +4,7 @@
 		<font size="7">!!!</font>
 		
 		<h1>NOTICE: We only welcome spider here. </h1>
-		<a href="pass.phps">Play cheat</a>
+		<a href="pass.txt">Play cheat</a>
 	</center>
 </div>
 
