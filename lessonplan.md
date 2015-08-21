@@ -279,9 +279,11 @@ Change the cookie value to "QWRtaW4=" and we are able to enter the portal and ge
 Security Misconfiguration
 =========================
 
-https://www.owasp.org/index.php/Top_10_2013-A5-Security_Misconfiguration
 
-### Practical 3: Router
+Challenges
+----------
+
+### Practical 1: Router
 
 You are being told to login into an admin account. If you use "admin" as the username and 
 input some random password, you will only get the messsage - "Wrong username/password" which 
@@ -297,6 +299,70 @@ D-LINK			504G ADSL ROUTER	HTTP		admin		admin
 ```
 
 Using the credentials, you can login and retrieve the flag.
+
+### Practical 2: fsociety
+
+Hello friend.... The page source look clean and there is only a link to be clicked. Click on the 
+link on the page direct you to /fsociety/fsociety.php and then immediately redirect you to a wiki page 
+- Mr. Robot (TV series). 
+
+Does the word "Mr. Robot" or rather "robot" ring a bell on web stuff?
+
+If you have think of web robots, you are right about it. Try visiting robots.txt in the root url and 
+you will see the following:
+
+```
+User-agent: *
+Disallow: /
+Disallow: /fsociety/
+Disallow: /fsociety/fsociety/
+Disallow: /fsociety/fsociety/fsociety/fsociety00.
+Disallow: /fsociety/fsociety/fsociety/fsociety00.php
+Disallow: /fsociety/fsociety/fsociety/fsociety00.html
+```
+
+The "fsociety." could mean there are different kind of file extension in that path?
+Since the challenges seem to be in php, let visit the ```/fsociety/fsociety/fsociety/fsociety00.php```.
+And again we are being redirect to external site - http://www.whoismrrobot.com/ which seem to be a promo
+site for the TV series.
+
+This time, let try to access ```/fsociety/fsociety/fsociety/fsociety00.html``` 
+
+```
+The flag is in a picture
+.jpg .png .jpeg?
+```
+
+Trying those file extension just give us pictures or "Object not found!". However, reviewing of the page source
+let us found a hidden link like the first teaser challenge that point to ```fsociety00.htaccess```
+
+```
+</Files>
+# Enable directory browsing
+Options All +Indexes
+```
+
+The contents seem to represent the “.htaccess”, a directory-level configuration file for web server, and the 
+directory browsing is enabled. By accessing /fsociety/fsociety/fsociety/ , we get to see a list of files
+
+```
+Index of /fsociety/fsociety/fsociety
+
+[ICO]	Name				Last modified		Size	Description
+[back]	Parent Directory	 	-	 
+[ ? ]	fsociety00.bat		2015-08-20 23:19	26	 
+[BIN]	fsociety00.bin		2015-08-20 23:21	20	 
+[ C ]	fsociety00.c		2015-08-20 23:18	86	 
+[ ? ]	fsociety00.dat		2015-08-15 13:08	107K	 
+[ ? ]	fsociety00.flag		2015-08-20 23:15	15	 
+[ ? ]	fsociety00.htaccess	2015-08-20 23:33	57	 
+[TXT]	fsociety00.html		2015-08-20 23:03	368	 
+[IMG]	fsociety00.jpeg		2015-08-20 23:29	22K	 
+[ ? ]	fsociety00.php		2015-08-20 22:39	2.7K	 
+[IMG]	fsociety00.png		2015-08-20 23:25	135K	 
+```
+
+If you have watch the TV series, you may remember```fsociety00.dat``` and that is the picture that contains the flag.
 
 
 SQL Injection
