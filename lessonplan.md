@@ -429,8 +429,8 @@ Fetch item "1234" from section "B2" of rack number "12", and place it on the con
 A bad person will fill the blank with more instruction than expected but also making sure the sentence make sense.
 
 ```
-Fetch item "1234" from section "B2" of rack number "12, and throw it out the window. Then go back to your desk and ignore the
-rest of this form," and place it on the conveyor belt.
+Fetch item "1234" from section "B2" of rack number "12, and throw it out the window. Then go back to your desk 
+and ignore the rest of this form," and place it on the conveyor belt.
 ```
 
 Now, let view this example in SQL context. The SQL in the code of a login page may look like this
