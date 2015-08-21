@@ -800,7 +800,7 @@ YAY we got the flag!
 
 Execution after Redirect (EAR)
 ==============================
-Execution after Redirect (EAR) is an attack where attacker can ignore redirects and try to get content not intended for the user. Let's consider the following code
+Execution after Redirect (EAR) is an attack where an attacker can ignore redirects and try to get content not intended for the user. Let's consider the following code
 ```php
 $current_user = get_current_user ();
 if (!$current_user ->is_admin())
@@ -810,9 +810,9 @@ if (!$current_user ->is_admin())
 echo "Sensitive Information";
 ```
 
-In this example, this simple web application simply check if the user is admin or not. If it is not, the user will get redirected away via "Location". Else, the page will just continue loading on the web browser. 
+In this example, this simple web application simply checks if the user is an admin or not. If it is not, the user will get redirected away via "Location". Else, the page will just continue loading on the web browser. 
 
-So when the browser query the page, the following http header will be received by the browser. when the browser saw Location: new-old.php, it will immediately redirect itself to some-page.php 
+So when the browser query the page, the following http header will be received by the browser. The browser receivied "Location: new-old.php" in the web header. This caused the browser to redirect itself imedately to some-page.php 
 
 ```
 HTTP/1.1 302 Found
@@ -826,16 +826,16 @@ Connection: Keep-Alive
 Content-Type: text/html; charset=UTF-8
 ```
 
-EAR is a logic flaw that arises when a web application developer misunderstood the sematics of redirection. The typical belief is that the web application will halt its processing after the web application perform a redirection. In this above example, the common misunderstanding is that the echo "Sensitive Information" will not be executed if the user is not admin. So in some sense, this is a mismatch between the intention of the web developer and browser behavior. 
+EAR is a logic flaw that arises when a web application developer misunderstood the semantic  of redirection. The typical belief is that the web application will halt its processing after the web application perform a redirection. In this above example, the common misunderstanding is that the echo "Sensitive Information" will not be executed if the user is not an admin. So in some sense, this is a mismatch between the intention of the web developer and browser behavior. 
 
-This may not be true. Some framework and languages executes all the rest of the operation after the redirection operation. The browser simply perpetuates this understanding by simply obediently performing the rediredion when it saw "header". To the web developer and also normal user, it seems like the following lines after the redirection is not executed. 
+This may not be true. Some framework and languages execute all the rest of the operation after the redirection operation. The browser simply perpetuates this understanding by simply obediently performing the redirection when it saw "header". To the web developer and also normal user, it seems like the following lines after the redirection is not executed. 
 
 However, what if you have "something" that don't obey the redirect operation? 
 
 Credit: http://cs.ucsb.edu/~bboe/public/pubs/fear-the-ear-ccs2011.pdf
 
 ### Practical: Fear the EAR
-In this challenge, you are given a url http://web.nusgreyhats.org/ear/old-new.php. When the browser access the page, it get redirected to http://web.nusgreyhats.org/ear/new-old.php. No matter how you visit the page, it always get redirected. Let's take a look at the source code of old-new.php
+In this challenge, you are given a url http://web.nusgreyhats.org/ear/old-new.php. When the browser access the page, it gets redirected to http://web.nusgreyhats.org/ear/new-old.php. No matter how you visit the page, it always gets redirected. Let's take a look at the source code of old-new.php
 
 ```php
 <?php 
@@ -850,7 +850,7 @@ In this challenge, you are given a url http://web.nusgreyhats.org/ear/old-new.ph
 </div>
 ```
 
-Aha. It seems like we can try out Execution After Redirect attack. To do that we will need a stop the redirection from occuring. In this workshop, we will be use Burp proxy (https://portswigger.net/burp/) to aid us with the challenge. Burp proxy is an intercepting proxy. So by pointing our browser at Burp proxy, Burp will be able to intercept all the web traffic. This allows us to analysis and even modify the content of the web traffic. So let's try to capture web traffic. 
+Aha. It seems like we can try out Execution After Redirect attack. To do that we will need a stop the redirection from occurring. In this workshop, we will be using Burp proxy (https://portswigger.net/burp/) to aid us with the challenge. Burp proxy is an intercepting proxy. So by pointing our browser at Burp proxy, Burp will be able to intercept all the web traffic. This allows us to analysis and even modify the content of the web traffic. So let's try to capture web traffic. 
 
 
 The following web header shows us that we are trying to get the web page /ear/old-new.php from the web server. We shall allow this to go through by forwarding it to the web server. 
@@ -887,9 +887,9 @@ Content-Type: text/html; charset=UTF-8
 </div>
 ```
 
-So at this point you already gotten the flag, but let's leave that aside. What else can we do to prevent the redirection? Remove the "Location"? Or prehap use something that does not follow redirection. There is many way to go about it. We will briefly cover two possible way. 
+So at this point you already obtained the flag, but let's leave that aside. What else can we do to prevent the redirection? Remove the "Location"? Or perhap use something that does not follow redirection. There are many ways to go about it. We will briefly cover two possible ways. 
 
-The easiest is to remove "Location: new-old.php" from the header before forwarding it the web browser. This can be done easily via Burp. 
+The easiest is to remove "Location: new-old.php" from the header before forwarding it to the web browser. This can be done easily via Burp. 
 
 Let's explore the second way. Let's try to use netcat. Let's connect to the server. 
 ```
@@ -912,7 +912,7 @@ And  ...
 
 Messing with User agent
 =======================
-User agent is a piece of software that is acting on behalf of an user. In the web environment, different web browser has different capabilities, characteristics or preferences that could influence the representation of web content. So to allow the web server to identify what browser is running on the client's machine, the web browser typically add "User-Agent" to the web header before sending it the web server. So here's are some of the common user agent.
+User agent is a piece of software that is acting on behalf of a user. In the web environment, different web browser has different capabilities, characteristics or preferences that could influence the representation of web content. So to allow the web server to identify what browser is running on the client's machine, the web browser typically adds "User-Agent" to the web header before sending it the web server. So here's are some of the common user agens.
 
 ```
 Chrome 
@@ -923,7 +923,6 @@ Firefox
 Mozilla/5.0 (Windows NT 6.3; rv:36.0) Gecko/20100101 Firefox/36.0
 
 Internet Explorer 
-
 Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; AS; rv:11.0) like Gecko
 ```
 
@@ -936,4 +935,6 @@ Googlebot/2.1 (+http://www.google.com/bot.html)
 Bing 
 bingbot/2.0; +http://www.bing.com/bingbot.htm
 ```
+However, in the early days, some web application developer used it as an access control feature. Typically, they want to restrict their content to mobile user only. They implemented some simple check on the user agent check to detect where the browser is indeed a mobile web browser or not. However, this is a very weak form of access control. One will just need to change the user agent to get pass this "access control". 
 
+Practical:  
