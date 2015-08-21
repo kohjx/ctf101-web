@@ -938,4 +938,83 @@ bingbot/2.0; +http://www.bing.com/bingbot.htm
 ```
 However, in the early days, some web application developer used it as an access control feature. Typically, they want to restrict their content to mobile user only. They implemented some simple check on the user agent check to detect where the browser is indeed a mobile web browser or not. However, this is a very weak form of access control. One will just need to change the user agent to get pass this "access control". 
 
-Practical:  
+### Practical:  Thou shall not pass 
+In this challenge, you are given a url to page tell you not to pass. The page also states that it welcome spider. So what kind of spider? Spiderman? Search Engine Spider? It is likely to be the latter one. So let's sit back and think again. How does the web server identify the type of web browser. User Agent. So the next step is to figure out what user agent to use. Search Engine Spider. Let's start with Google. 
+
+ ```
+ Google's user agent: Googlebot
+ ```
+
+Again, let's try to access the webpage through a intercepting proxy. 
+```
+GET /test/pass.php HTTP/1.0
+Host: 127.0.0.1
+User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; rv:26.0) Gecko/20100101 Firefox/26.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://127.0.0.1/test/
+Connection: keep-alive
+Pragma: no-cache
+```
+
+Let's try to change the user agent to Googlebot.
+```
+User-Agent: Googlebot
+```
+
+Aha. 
+```
+HTTP/1.1 200 OK
+Date: Fri, 21 Aug 2015 17:47:12 GMT
+Server: Apache/2.4.10 (Win32) OpenSSL/1.0.1i PHP/5.6.3
+X-Powered-By: PHP/5.6.3
+Content-Length: 297
+Keep-Alive: timeout=5, max=100
+Connection: Keep-Alive
+Content-Type: text/html; charset=UTF-8
+
+<div>
+	<center>
+		<h1>Thou shall not pas</h1>
+		<font size="7">!!!</font>
+		
+		<h1>NOTICE: We only welcome spider here. </h1>
+		<a href="pass.phps">Play cheat</a>
+	</center>
+</div>
+
+<div>
+	<center>
+		<br><br>Welcome my dear friend. <br>The flag is [redacted]	</center>
+</div>
+```
+
+We got the flag. So what is happening? Let's take a look at the source code. 
+```phph
+<div>
+    <center>
+        <h1>Thou shall not pas</h1>
+        <font size="7">!!!</font>
+        
+        <h1>NOTICE: We only welcome spider here. </h1>
+        <a href="pass.phps">Play cheat</a>
+    </center>
+</div>
+
+<div>
+    <center>
+        <?php
+        
+            if (preg_match('/Googlebot/', $_SERVER['HTTP_USER_AGENT'])) {
+                echo "<br><br>";
+                 echo "Welcome my dear friend. <br>";
+                echo "The flag is [redacted]";
+            }
+        ?>
+    </center>
+</div>
+```
+
+So this lousy piece of code is not really well coded. So if it detect that the user agent is Googlebot, it will just simply echo out the content. 
+
