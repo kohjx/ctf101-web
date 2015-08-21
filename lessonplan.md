@@ -69,6 +69,9 @@ Topics to Cover
 	* Cookies
 	* Teaser Challenges
 * Security Misconfiguration
+	* Default Accounts
+	* Error Messages
+	* Other Misconfiguration
 	* Challenges
 * SQL injection
 * Local File Inclusion
@@ -279,6 +282,45 @@ Change the cookie value to "QWRtaW4=" and we are able to enter the portal and ge
 Security Misconfiguration
 =========================
 
+Default Accounts
+----------------
+
+Default accounts should have the account disabled/removed or at least have their default passwords changed
+especially root/admin account. The system could be completely compromised without you knowing it. All of your
+data could be stolen or modified slowly over time.
+
+Example: phpMyAdmin default account ```root``` have empty password. This is dangerous as the root have the highest
+level of privileges.
+
+Error Messages
+--------------
+Overly informative error messages, such as stack traces, database dumps, error codes, should not be shown to the user.
+
+Example: The following tell us about the location of the web page inside the server and information of the php code.
+
+```
+Warning: file_put)contents(./nusgreyhats.log): failed to open stream:
+
+Permission denied in /opt/lampp/htdocs/lfi/login.php on line 10
+``` 
+
+Example: By accessing http://ctf.nusgreyhats.org/flag.txt, it gives us a ```Object not found!``` page while accessing
+http://ctf.nusgreyhats.org/flag2.txt gives us a  ```Access forbidden!" page. This tell us that ```flag2.txt``` existed
+in the server.
+
+Other Misconfigurations
+-----------------------
+File and directory permission not set properly will allow users to explore restricted directory and read/write
+confidential files
+
+By permit directory listing, users can get to view all of the files on the web server, leading to sensitive files
+viewed by the users.
+
+Unnecessary ports opened allows unauthorized hosts to connect to the server, may result in attackers to gain control
+over the server
+
+unnecessary services enabled may be exploitable for the attacker to get into the server.  
+
 
 Challenges
 ----------
@@ -362,7 +404,7 @@ Index of /fsociety/fsociety/fsociety
 [IMG]	fsociety00.png		2015-08-20 23:25	135K	 
 ```
 
-If you have watch the TV series, you may remember```fsociety00.dat``` and that is the picture that contains the flag.
+If you have watch the TV series, you may remember```fsociety00.dat``` and that will be the file that contains the flag.
 
 
 SQL Injection
