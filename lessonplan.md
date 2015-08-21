@@ -79,6 +79,7 @@ Topics to Cover
 	* Challenges
 * Local File Inclusion
 * Execution after Redirect (EAR)
+* Messing with User agent
 	
 Getting started
 ===============
