@@ -36,7 +36,9 @@ extensions/add-ons to complete the practicals:
 
 * "Tamper data" (Chrome/Firefox)
 * "EditThisCookie" (Chrome) or “firebug”(Firefox)
+* "FoxyProxy" (Firefox)
 
+It will also very useful if you have a web intercepting proxy. In this workshop, we will be using Burp proxy (https://portswigger.net/burp/proxy.html). 
 
 Accessing the CTF101 Scoreboard
 -------------------------------
@@ -75,7 +77,7 @@ Topics to Cover
 	* Challenges
 * SQL injection
 * Local File Inclusion
-	
+* Execution after Redirect (EAR)
 	
 Getting started
 ===============
