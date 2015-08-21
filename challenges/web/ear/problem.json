@@ -3,7 +3,7 @@
     "score": 4,
     "category": "EAR",
     "grader": "web/ear/grader.py",
-    "description": "We heard that using EAR can give you more information. Let's try to find the <a target=_blank href='http://web.nusgreyhats.org/ear/new-old.php'>flag</a>.",
+    "description": "We heard that using EAR can give you more information. Let's try to find the <a target=_blank href='http://web.nusgreyhats.org/ear/old-new.php'>flag</a>.",
     "threshold": 0,
     "weightmap": {},
     "hint": "Find a not so obedient web renderer"
