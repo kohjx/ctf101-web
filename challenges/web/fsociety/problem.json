@@ -1,0 +1,10 @@
+{
+    "name": "fsociety",
+    "score": 5,
+    "category": "Web",
+    "grader": "web/router/grader.py",
+    "description": "Find the flag <a target=_blank href='http://128.199.157.19/fsociety/fsociety.php'>here</a>.",
+    "threshold": 0,
+    "weightmap": {},
+    "hint": "Bots...."
+}

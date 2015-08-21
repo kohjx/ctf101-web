@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /
+Disallow: /fsociety/
+Disallow: /fsociety/fsociety/
+Disallow: /fsociety/fsociety/fsociety/
+Disallow: /fsociety/fsociety/fsociety/fsociety00.
