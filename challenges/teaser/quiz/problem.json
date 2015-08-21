@@ -1,6 +1,6 @@
 {
     "name": "Quiz",
-    "score": 2,
+    "score": 1,
     "category": "Teaser",
     "grader": "teaser/quiz/grader.py",
     "description": "Score 100% at this mini quiz <a target=_blank href='http://128.199.157.19/quiz/quiz.php'>here</a>",

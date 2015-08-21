@@ -1,7 +1,7 @@
 {
     "name": "fsociety",
-    "score": 5,
-    "category": "Web",
+    "score": 4,
+    "category": "Security Misconfiguration",
     "grader": "web/fsociety/grader.py",
     "description": "Find the flag <a target=_blank href='http://128.199.157.19/fsociety/fsociety.php'>here</a>.",
     "threshold": 0,

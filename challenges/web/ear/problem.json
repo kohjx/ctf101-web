@@ -1,9 +1,9 @@
 {
     "name": "Fear the EAR",
     "score": 4,
-    "category": "Web",
-    "grader": "ear/grader.py",
-    "description": "We heard that using EAR can give you more information. Let's try to find the <a target=_blank href=''>flag</a>.",
+    "category": "EAR",
+    "grader": "web/ear/grader.py",
+    "description": "We heard that using EAR can give you more information. Let's try to find the <a target=_blank href='http://128.199.157.19/ear/new-old.php'>flag</a>.",
     "threshold": 0,
     "weightmap": {},
     "hint": "Google is your best friend"

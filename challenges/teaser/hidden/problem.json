@@ -1,6 +1,6 @@
 {
     "name": "Hidden",
-    "score": 2,
+    "score": 1,
     "category": "Teaser",
     "grader": "teaser/hidden/grader.py",
     "description": "Find the hidden flag <a target=_blank href='http://128.199.157.19/hidden/hidden.php'>here</a>",
