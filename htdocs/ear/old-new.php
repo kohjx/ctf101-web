@@ -5,6 +5,6 @@
 
 <div>
 	<center>
-		<?php echo "The flag is flag{fear_the_ear}" ?> 
+		<?php echo "The flag is flag{f3ar_the_3ar}" ?> 
 	</center>
 </div>
