@@ -1,6 +1,6 @@
 {
     "name": "Router",
-    "score": 3,
+    "score": 4,
     "category": "Security Misconfiguration",
     "grader": "web/router/grader.py",
     "description": "Login into admin account to get the flag. <a target=_blank href='http://web.nusgreyhats.org/router/router.php'>login portal</a>",

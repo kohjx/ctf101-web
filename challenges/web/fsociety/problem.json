@@ -1,6 +1,6 @@
 {
     "name": "fsociety",
-    "score": 4,
+    "score": 5,
     "category": "Security Misconfiguration",
     "grader": "web/fsociety/grader.py",
     "description": "Find the flag <a target=_blank href='http://web.nusgreyhats.org/fsociety/fsociety.php'>here</a>.",

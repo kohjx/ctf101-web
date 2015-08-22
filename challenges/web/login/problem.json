@@ -1,6 +1,6 @@
 {
     "name": "Login",
-    "score": 8,
+    "score": 6,
     "category": "SQL Injection",
     "grader": "web/login/grader.py",
     "description": "Login into an admin account <a target=_blank href='http://web.nusgreyhats.org/login/login.php'>here</a>",

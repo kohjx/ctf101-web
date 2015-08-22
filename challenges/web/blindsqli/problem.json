@@ -1,6 +1,6 @@
 {
 	"name": "Blind SQL Injection",
-	"score": 10,
+	"score": 7,
 	"category": "SQL Injection",
 	"grader": "web/blindsqli/grader.py",
 	"description": "Try logging in as admin to obtain the flag. <a href='http://web.nusgreyhats.org/blindsqli/index.php'>Login page</a>",

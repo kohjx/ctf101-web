@@ -1,6 +1,6 @@
 {
     "name": "Member",
-    "score": 1,
+    "score": 3,
     "category": "Teaser",
     "grader": "teaser/member/grader.py",
     "description": "You have logged in at this site.<br/>Find a way to enter the admin portal found <a target=_blank href='http://web.nusgreyhats.org/member/member.php'>here</a>",

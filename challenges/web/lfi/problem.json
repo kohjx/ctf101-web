@@ -1,6 +1,6 @@
 {
 	"name": "Local File Inclusion",
-	"score": 6,
+	"score": 8,
 	"category": "Local File Inclusion",
 	"grader": "web/lfi/grader.py",
 	"description": "Read flag.txt located in the server. <a href='http://web.nusgreyhats.org/lfi/index.php'>Web page</a>",
